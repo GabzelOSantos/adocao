@@ -1,118 +1,71 @@
 package view;
 
-import connection.Conexao;
+public class Adocao{
 
-import javax.swing.*;
-import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+    private String nome;
+    private int idade;
+    private Tipo tipo;
+    private  String raca;
+    private String endereco;
+    private String telefone;
 
-public class Adocao extends JFrame{
 
-    public void criarJanela(){
-        JFrame frame = new JFrame("Tela de Cadastro");
-        frame.setSize(300, 600);
-        frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Adocao(){}
 
-        frame.setBackground(Color.BLACK);
+    public Adocao(String nome, int idade, Tipo tipo, String raca, String endereco, String telefone) {
+        this.nome = nome;
+        this.idade = idade;
+        this.tipo = tipo;
+        this.raca = raca;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }
 
-        JLabel labelNome = new JLabel("Nome");
-        labelNome.setBounds(20,30,150,40);
+    public String getNome() {
+        return nome;
+    }
 
-        JTextField nome = new JTextField();
-        nome.setBounds(20,60,250,40);
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-        JLabel labelIdade = new JLabel("Idade");
-        labelIdade.setBounds(20,110,150,40);
+    public int getIdade() {
+        return idade;
+    }
 
-        JTextField idade = new JTextField();
-        idade.setBounds(20,140,250,40);
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
 
-        JLabel labelTipo = new JLabel("Tipo");
-        labelTipo.setBounds(20,180,150,40);
+    public Tipo getTipo() {
+        return tipo;
+    }
 
-        JTextField tipo = new JTextField();
-        tipo.setBounds(20,210,250,40);
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
 
-        JLabel labelRaca = new JLabel("Raça");
-        labelRaca.setBounds(20,250,150,40);
+    public String getRaca() {
+        return raca;
+    }
 
-        JTextField raca = new JTextField();
-        raca.setBounds(20,290,250,40);
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
 
-        JLabel labelEndereco = new JLabel("Endereço");
-        labelEndereco.setBounds(20,330,150,40);
+    public String getEndereco() {
+        return endereco;
+    }
 
-        JTextField endereco = new JTextField();
-        endereco.setBounds(20,360,250,40);
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-        JLabel labelTelefone = new JLabel("Telefone");
-        labelTelefone.setBounds(20,400,150,40);
+    public String getTelefone() {
+        return telefone;
+    }
 
-        JTextField telefone = new JTextField();
-        telefone.setBounds(20,430,250,40);
-
-        JButton enviar = new JButton("Enviar");
-        enviar.setBounds(65, 490, 150, 40);
-
-        frame.add(labelNome);
-        frame.add(nome);
-
-        frame.add(labelIdade);
-        frame.add(idade);
-
-        frame.add(labelTipo);
-        frame.add(tipo);
-
-        frame.add(labelRaca);
-        frame.add(raca);
-
-        frame.add(labelEndereco);
-        frame.add(endereco);
-
-        frame.add(labelTelefone);
-        frame.add(telefone);
-
-        frame.add(enviar);
-
-        enviar.addActionListener(e -> {
-            String sql = "INSERT INTO adotar(nome, idade, tipo, raca, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?)";
-
-            String nomeAnimal = labelNome.getText();
-            String idadeAnimal = labelIdade.getText();
-            String tipoAnimal = labelTipo.getText();
-            String racaAnimal = labelRaca.getText();
-            String enderecoAnimal = labelEndereco.getText();
-            String telefoneAnimal = labelTelefone.getText();
-
-            try{
-                // Conexão com o Banco
-
-                Connection conexao = Conexao.conectar();
-                PreparedStatement ps = conexao.prepareStatement(sql);
-
-                ps.setString(1, nomeAnimal);
-                ps.setString(2, idadeAnimal);
-                ps.setString(3, tipoAnimal);
-                ps.setString(4, racaAnimal);
-                ps.setString(5, enderecoAnimal);
-                ps.setString(6, telefoneAnimal);
-
-                ps.executeUpdate();
-
-                JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
-
-                ps.close();
-                conexao.close();
-
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-        frame.setVisible(true);
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
